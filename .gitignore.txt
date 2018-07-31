@@ -1,4 +1,2 @@
-Sample Report.pdf
-Rubrics.docx
-finalproject.pdf
+ruburics/
 .ipynb_checkpoints/
