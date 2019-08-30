@@ -5,7 +5,13 @@ categories: portfolio
 mathjax: true
 ---
 
-**1. Dataset overview and Initial assessment**
+## Project Objective
+
+This is data cleaning project. I used OpenRefine, python to clean and refine 'US Farmers Market dataset'.
+
+
+
+### **1. Dataset overview and Initial assessment**
 
 **1.1 Dataset**
 
@@ -53,6 +59,8 @@ Credit~WildHarvested: (binary) Whether some of products or payment methods are a
 
 updateTime: (date) the date of information updated
 
+
+
 **1.2 Quality Issue**
 
 Dataset contains lots of null data. Mostly, it lacks media attributes such as website, facebook and others. Although some location data like zip, street, city are missing, it can be replaced by using x, y data which are assumed to be longitude and latitude of the market. 
@@ -71,13 +79,10 @@ Attribute county contains both lowercase and uppercase.
 
 Although there are some missing values, and inconsistent in format, most part of data are well organized. Without any processing data, it can be used for below cases:
 
-   How much of each payments methods such as credit, WIC and others in overall market places are available.
-
-   List of products available in each market.
-
-   Analyzing the number of farmers markets in each city or states
-
-   The number of farmers markets per 10,000 people in each city or states
+- How much of each payments methods such as credit, WIC and others in overall market places are available.
+- List of products available in each market.
+- Analyzing the number of farmers markets in each city or states
+- The number of farmers markets per 10,000 people in each city or states
 
  
 
@@ -85,15 +90,13 @@ Although there are some missing values, and inconsistent in format, most part of
 
 After going through some cleaning process, this dataset can be used for:
 
-   A map that give exact locations of each Farmers market with some of information can be made, when some of the locations data should be reformatted or replaced with the use of latitude and longitude data. 
-
-   In what period of time the farmers market season1 open most or least. To do so, season1 date should be reformatted in same format such as DD/MM/YYYY.
-
-   Showing the number of farmers markets per 10,000 people in each county is available after, county data needs to be clustered into same values.
+- A map that give exact locations of each Farmers market with some of information can be made, when some of the locations data should be reformatted or replaced with the use of latitude and longitude data. 
+- In what period of time the farmers market season1 open most or least. To do so, season1 date should be reformatted in same format such as DD/MM/YYYY.
+- Showing the number of farmers markets per 10,000 people in each county is available after, county data needs to be clustered into same values.
 
  
 
-**2. Data Cleaning with OpenRefine**
+### **2. Data Cleaning with OpenRefine**
 
 With OpenRefine, data will be clustered if they are in similar text, or reformatted to keep consistency of data. Firstly, all column data should be trimmed and collapsed if they have consecutive white spaces. Next, county, city, States names are inconsistent. Some of them are in uppercase while others are not. They need to be converted into same format by clustering function. Some of SeasonDate columns contain various formats which should be fixed with the use of regular expression.
 
@@ -111,9 +114,13 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
 \- Use text facet and cluster again by using key collision method and ngram-fingerprint, except those have distinct different names such as Arkansas Home Grown Market II and Arkansas Home Grown Market III.
 
-![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image002.jpg)
+<p align='center'>
+    <img src = 'img/clustering.jpg' width='80%'>
+    <br/>
+    <sub>Figure 1 Clustering "MarketName"</sub>
+</p>
 
-Figure 1 Clustering "MarketName"
+
 
 **2.2 Website**
 
@@ -131,9 +138,13 @@ Figure 1 Clustering "MarketName"
 
 \- Reformat data that starts with ‘@data’ or ‘#data’ to https://facebook.com/data for better access and consistency by using python/jython.
 
-![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image004.jpg)
+<p align='center'>
+    <img src = 'img/na_values.jpg' width='80%'>
+    <br/>
+    <sub>Figure 2 Cleaning 'NA' and 'none' values in "Facebook"</sub>
+</p>
 
-Figure 2 Cleaning ‘NA’ and ‘none’ values in "Facebook"
+
 
 **2.4 Twitter**
 
@@ -143,9 +154,13 @@ Figure 2 Cleaning ‘NA’ and ‘none’ values in "Facebook"
 
 \- Reformat data that starts with ‘@data’ or ‘#data’ to https://twitter.com/data for better access and consistency by using python/jython.
 
-![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image006.jpg)
+<p align='center'>
+    <img src = 'img/reformat.jpg' width='80%'>
+    <br/>
+    <sub>Figure 3 Reformatting "Twitter"</sub>
+</p>
 
-Figure 3 Reformatting "Twitter"
+
 
 **2.5 Youtube**
 
@@ -183,9 +198,13 @@ Figure 3 Reformatting "Twitter"
 
 \- Use text facet and cluster again by using key collision method and ngram-fingerprint, except those have distinct different names.
 
-![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image008.jpg)
+<p align='center'>
+    <img src = 'img/cluster_city.jpg' width='80%'>
+    <br/>
+    <sub>Figure 4 Clustering "city"</sub>
+</p>
 
-Figure 4 Clustering "city"
+
 
 **2.9 zip**
 
@@ -193,9 +212,13 @@ Figure 4 Clustering "city"
 
 \- United States zip code follows NNNNN or NNNNN-NNNN format, check if the format is right with GREL.
 
-![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image010.jpg)
+<p align='center'>
+    <img src = 'img/format_zip.jpg' width='80%'>
+    <br/>
+    <sub>Figure 5 Format Check in "zip"</sub>
+</p>
 
-Figure 5 Format Check in "zip"
+
 
 **2.10 Season1Date**
 
@@ -205,9 +228,13 @@ Figure 5 Format Check in "zip"
 
 \- For better use and clear view, split into two columns: one is start date “Season1StartDate”, and the another is end date “Season1EndDate”.
 
-![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image012.jpg)
+<p align='center'>
+    <img src = 'img/split_season1date.jpg' width='80%'>
+    <br/>
+    <sub>Figure 6 Split "Season1Date" into two different columns</sub>
+</p>
 
-Figure 6 Split "Season1Date" into two different columns
+
 
 **2.11 Season1StartDate**
 
@@ -253,27 +280,35 @@ Figure 6 Split "Season1Date" into two different columns
 
 \- Convert ‘Month DD YYYY time’ format to ‘MM/DD/YYYY time’ format for data consistency by using python/jython.
 
-![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image014.png)
-
-Figure 7 "updatedTime" Format change
+<p align='center'>
+    <img src = 'img/format_updatetime.jpg' width='80%'>
+    <br/>
+    <sub>Figure 7 "updateTime" Format Change</sub>
+</p>
 
 The processed data is saved as ‘farmersmarkets-or.csv’.
 
  
 
-**3. Applying more suitable solutions(Python)**
+### **3. Applying more suitable solutions(Python)**
 
 Albeit OpenRefine is a great tool for cleaning data, there are some limitations. For Farmers Market data, the tool cannot help filling some of missing zip code. And by using ‘uszipcode‘ package in python along with latitude, and longitude variables (which are ‘x’, ’y’), zip code can be filled.(“fill_zipcode.ipynb” python file includes the script)
 
 Based on closest match from given latitude, and longitude, when city name of searched zip code and city name of the data matches, the data zip code is assigned with matched zip code. In case there are no matches for city names, zip code is given according to the closest distance.
 
-![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image016.png)
+<p align='center'>
+    <img src = 'img/sample_uszipcode.jpg' width='80%'>
+    <br/>
+    <sub>Figure 8 Sample of "uszipcode" package</sub>
+</p>
 
-Figure 8 Sample of "uszipcode" package
+
 
 Out of 961 missing zip code, 934 cases are filled. Remain 27 data is also missing x, y values, which makes it hard to find zip code. After that ‘farmersmarkets-py.csv’ file is created.
 
-**4. Develop Relational Database Schema**
+
+
+### **4. Develop Relational Database Schema**
 
 First, the ER diagram is developed for uploading csv file to database.
 
@@ -353,6 +388,8 @@ For integrity of data table, there are several things to be checked.
 
 \- As FMID is primary key, there should not be the same FMID or empty FMID. “2_fmid_check.sql” file conducts corresponding integrity.
 
+------
+
 **SELECT** count(FMID) 
 
 **FROM** market 
@@ -365,6 +402,8 @@ For integrity of data table, there are several things to be checked.
 
 0
 
+------
+
 \- First query checks null FMID, and second query counts the difference between distinct FMID values and the number of whole dataset, which is zero.
 
  
@@ -372,6 +411,8 @@ For integrity of data table, there are several things to be checked.
 **4.2.2 Website, Facebook, Youtube, Twitter, OtherMedia**
 
 \- Website, Facebook, Twitter Youtube data should not be same as OtherMedia or each other. “3_othermedia_check.sql” checks the number of same values compared to website, facebook, youtube, or twitter.
+
+----------------------------------------------------------------------------------------------------------------------------------------
 
 **SELECT** "Facebook == Othermida cases: ", count(Facebook) 
 
@@ -381,9 +422,15 @@ For integrity of data table, there are several things to be checked.
 
 "Facebook == Othermida cases: ",4
 
+------
+
 \- As we can see from the above constraint check, there are several cases where OtherMedia column has same data as Facebook(Website, Youtube, Twitter were also checked).
 
 \- Using sqlite, OtherMedia column data are set to blank for preventing redundancy. (“4_othermedia_clean.sql”)
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
 
 **UPDATE** market 
 
@@ -397,7 +444,7 @@ For integrity of data table, there are several things to be checked.
 
 **WHERE** OtherMedia = Facebook **AND** Othermedia != "");
 
- 
+------
 
  
 
@@ -407,6 +454,8 @@ For integrity of data table, there are several things to be checked.
 
 \- By using python, missing zip values were filled based on its x, y values. Therefore, there should not be empty zip values if x and y data are present. Check whether there are empty zip data where x, y are present throughout “5_zip_check.sql” codes.
 
+------
+
 **SELECT** zip, x, y 
 
 **FROM** market 
@@ -415,6 +464,8 @@ For integrity of data table, there are several things to be checked.
 
 **AND** zip ="";
 
+------
+
 As nothing shows, there are no data which violates this integrity constraint.
 
  
@@ -422,6 +473,8 @@ As nothing shows, there are no data which violates this integrity constraint.
 **4.2.4 Season1StartDate, Season1EndDate**
 
 \- Season end date should not be earlier than season start date where date is not empty, and excludes cases like “April”, “May” and so on.(“6_seasondate_check.sql”)
+
+------
 
 **SELECT** FMID, Season1StartDate, Season1EndDate 
 
@@ -435,7 +488,11 @@ As nothing shows, there are no data which violates this integrity constraint.
 
 1011959,2016-10-01T00:00:00Z,2016-05-07T00:00:00Z
 
+------
+
 \- There is one case which obviously end date is earlier than start date. Switch Season1StartDate and Season1EndDate data for that row.(“7_seasondate_clean.sql”)
+
+------
 
 **UPDATE** market 
 
@@ -453,9 +510,13 @@ As nothing shows, there are no data which violates this integrity constraint.
 
 **AND** printf("%d", Season1StartDate)!= "0");
 
- 
+------
 
 \- After conducting above cleaning query, the start date and end date are switched properly for corresponding row.
+
+
+
+------
 
 **SELECT** FMID, Season1StartDate, Season1EndDate 
 
@@ -464,6 +525,8 @@ As nothing shows, there are no data which violates this integrity constraint.
 **WHERE** FMID = 1011959;
 
 1011959,2016-05-07T00:00:00Z,2016-10-01T00:00:00Z
+
+------
 
 \- The processed data is stored as “farmersmarkets-sql.csv” throughout queries on “8_export_csv.sql”.
 
@@ -479,7 +542,7 @@ As nothing shows, there are no data which violates this integrity constraint.
 
  
 
-**5. Workflow Model**
+### **5. Workflow Model**
 
 YesWorkFlow is used to create workflow model of overall process and OpenRefine process.
 
@@ -489,27 +552,31 @@ YesWorkFlow is used to create workflow model of overall process and OpenRefine p
 
 Overall workflow shows the whole process taken throughout openrefine, python, and sqlite.
 
-**![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image018.png)**
+<p align='center'>
+    <img src = 'img/overall_workflow.jpg' width='80%'>
+    <br/>
+    <sub>Figure 9 Overall Workflow</sub>
+</p>
 
-Figure 9 Overall Workflow
+
 
 **5.2 OpenRefine Workflow**
 
 Openrefine workflow covers each steps taken in ‘CleanWithOpenRefine’ from the overall workflow.
 
-![img](file:///C:/Users/tony/AppData/Local/Temp/msohtmlclip1/01/clip_image020.png)
+<p align='center'>
+    <img src = 'img/openrefine_workflow.jpg' width='80%'>
+    <br/>
+    <sub>Figure 10 OpenRefine Workflow</sub>
+</p>
 
-Figure 10 OpenRefine Workflow
+
+
+
 
  
 
- 
-
- 
-
- 
-
-**6. Conclusion**
+## **6. Conclusion**
 
 Although many parts of data have been cleaned and reformatted for better data consistency and integrity, there is a problem left unsolved due to the incomplete dataset. Date type data such as “updateTime”, and “Season1StartDate”, contain either “Month” or “DD/MM/YYYY” format. This is because data with “Month” format does not have year information. Due to this issue, the usability of whole dataset is quite constrained. 
 
