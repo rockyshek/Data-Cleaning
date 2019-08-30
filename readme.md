@@ -5,15 +5,15 @@ categories: portfolio
 mathjax: true
 ---
 
-## Project Objective
+# Project Objective
 
 This is data cleaning project. I used OpenRefine, python to clean and refine 'US Farmers Market dataset'.
 
 
 
-### **1. Dataset overview and Initial assessment**
+## **1. Dataset overview and Initial assessment**
 
-**1.1 Dataset**
+### **1.1 Dataset**
 
 US Farmers Market dataset is lists of markets that sell agricultural products directly to customers at a common, recurrent physical location. It is originally designed to provide customers information about farmers market such as market locations, directions, operating times, media sources, products sell, and more.
 
@@ -61,7 +61,7 @@ updateTime: (date) the date of information updated
 
 
 
-**1.2 Quality Issue**
+### **1.2 Quality Issue**
 
 Dataset contains lots of null data. Mostly, it lacks media attributes such as website, facebook and others. Although some location data like zip, street, city are missing, it can be replaced by using x, y data which are assumed to be longitude and latitude of the market. 
 
@@ -73,7 +73,7 @@ Attribute county contains both lowercase and uppercase.
 
  
 
-**1.3 Use Case**
+### **1.3 Use Case**
 
 **1.3.1 Is data clean enough for use cases?**
 
@@ -96,7 +96,7 @@ After going through some cleaning process, this dataset can be used for:
 
  
 
-### **2. Data Cleaning with OpenRefine**
+## **2. Data Cleaning with OpenRefine**
 
 With OpenRefine, data will be clustered if they are in similar text, or reformatted to keep consistency of data. Firstly, all column data should be trimmed and collapsed if they have consecutive white spaces. Next, county, city, States names are inconsistent. Some of them are in uppercase while others are not. They need to be converted into same format by clustering function. Some of SeasonDate columns contain various formats which should be fixed with the use of regular expression.
 
@@ -104,7 +104,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
  
 
-**2.1 MarketName**
+### **2.1 MarketName**
 
 \- Trim leading and trailing white space.
 
@@ -122,13 +122,13 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
 
 
-**2.2 Website**
+### **2.2 Website**
 
 \- Trim leading and trailing white space.
 
  
 
-**2.3 Facebook**
+### **2.3 Facebook**
 
 \- Trim leading and trailing white space.
 
@@ -146,7 +146,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
 
 
-**2.4 Twitter**
+### **2.4 Twitter**
 
 \- Trim leading and trailing white space.
 
@@ -162,7 +162,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
 
 
-**2.5 Youtube**
+### **2.5 Youtube**
 
 \- Trim leading and trailing white space.
 
@@ -170,7 +170,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
  
 
-**2.6 OtherMedia**
+### **2.6 OtherMedia**
 
 \- Trim leading and trailing white space.
 
@@ -180,7 +180,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
  
 
-**2.7 street**
+### **2.7 street**
 
 \- Trim leading and trailing white space.
 
@@ -188,7 +188,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
  
 
-**2.8 city**
+### **2.8 city**
 
 \- Trim leading and trailing white space.
 
@@ -206,7 +206,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
 
 
-**2.9 zip**
+### **2.9 zip**
 
 \- Convert any string values to blank using GREL.
 
@@ -220,7 +220,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
 
 
-**2.10 Season1Date**
+### **2.10 Season1Date**
 
 \- Trim leading and trailing white space.
 
@@ -236,7 +236,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
 
 
-**2.11 Season1StartDate**
+### **2.11 Season1StartDate**
 
 \- Clean separator ‘to’ to blank
 
@@ -244,31 +244,31 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
  
 
-**2.12 Season1EndDate**
+### **2.12 Season1EndDate**
 
 \- Change the date type to date, and its format becomes YYYY.MM.DD.
 
  
 
-**2.13 Season2,3,4Date and Season2,3,4Time**
+### **2.13 Season2,3,4Date and Season2,3,4Time**
 
 \- Considering that about 95% of these columns are blank, drop the columns for decreasing sparsity of data.
 
  
 
-**2.14 x**
+### **2.14 x**
 
 \- Trim leading and trailing white space.
 
  
 
-**2.15 y**
+### **2.15 y**
 
 \- Trim leading and trailing white space.
 
  
 
-**2.16 Organic**
+### **2.16 Organic**
 
 \- Replace “-“ string to blank with use of GREL.
 
@@ -276,7 +276,7 @@ With OpenRefine, data will be clustered if they are in similar text, or reformat
 
  
 
-**2.17 updatedTime**
+### **2.17 updatedTime**
 
 \- Convert ‘Month DD YYYY time’ format to ‘MM/DD/YYYY time’ format for data consistency by using python/jython.
 
@@ -290,7 +290,7 @@ The processed data is saved as ‘farmersmarkets-or.csv’.
 
  
 
-### **3. Applying more suitable solutions(Python)**
+## **3. Applying more suitable solutions(Python)**
 
 Albeit OpenRefine is a great tool for cleaning data, there are some limitations. For Farmers Market data, the tool cannot help filling some of missing zip code. And by using ‘uszipcode‘ package in python along with latitude, and longitude variables (which are ‘x’, ’y’), zip code can be filled.(“fill_zipcode.ipynb” python file includes the script)
 
@@ -308,11 +308,11 @@ Out of 961 missing zip code, 934 cases are filled. Remain 27 data is also missin
 
 
 
-### **4. Develop Relational Database Schema**
+## **4. Develop Relational Database Schema**
 
 First, the ER diagram is developed for uploading csv file to database.
 
-**4.1 Schema**
+### **4.1 Schema**
 
 Below figure is the ER diagram of farmers market dataset. As it has only one table, it does not contain any foreign keys. “1_create_schema.sql” file creates schema and imports csv file to that table.
 
@@ -378,7 +378,7 @@ Below figure is the ER diagram of farmers market dataset. As it has only one tab
 
  
 
-**4.2 Integrity Conatraints**
+### **4.2 Integrity Conatraints**
 
 For integrity of data table, there are several things to be checked.
 
@@ -406,7 +406,7 @@ For integrity of data table, there are several things to be checked.
 
 \- First query checks null FMID, and second query counts the difference between distinct FMID values and the number of whole dataset, which is zero.
 
- 
+ <br/>
 
 **4.2.2 Website, Facebook, Youtube, Twitter, OtherMedia**
 
@@ -428,7 +428,7 @@ For integrity of data table, there are several things to be checked.
 
 \- Using sqlite, OtherMedia column data are set to blank for preventing redundancy. (“4_othermedia_clean.sql”)
 
-
+<br/>
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -448,7 +448,7 @@ For integrity of data table, there are several things to be checked.
 
  
 
- 
+<b4/>
 
 **4.2.3 zip**
 
@@ -468,7 +468,7 @@ For integrity of data table, there are several things to be checked.
 
 As nothing shows, there are no data which violates this integrity constraint.
 
- 
+ <br/>
 
 **4.2.4 Season1StartDate, Season1EndDate**
 
@@ -492,6 +492,8 @@ As nothing shows, there are no data which violates this integrity constraint.
 
 \- There is one case which obviously end date is earlier than start date. Switch Season1StartDate and Season1EndDate data for that row.(“7_seasondate_clean.sql”)
 
+<br/>
+
 ------
 
 **UPDATE** market 
@@ -514,7 +516,7 @@ As nothing shows, there are no data which violates this integrity constraint.
 
 \- After conducting above cleaning query, the start date and end date are switched properly for corresponding row.
 
-
+<br/>
 
 ------
 
@@ -532,23 +534,13 @@ As nothing shows, there are no data which violates this integrity constraint.
 
  
 
- 
-
- 
-
- 
-
- 
-
- 
-
-### **5. Workflow Model**
+## **5. Workflow Model**
 
 YesWorkFlow is used to create workflow model of overall process and OpenRefine process.
 
  
 
-**5.1 Overall Workflow**
+### **5.1 Overall Workflow**
 
 Overall workflow shows the whole process taken throughout openrefine, python, and sqlite.
 
@@ -560,7 +552,7 @@ Overall workflow shows the whole process taken throughout openrefine, python, an
 
 
 
-**5.2 OpenRefine Workflow**
+### **5.2 OpenRefine Workflow**
 
 Openrefine workflow covers each steps taken in ‘CleanWithOpenRefine’ from the overall workflow.
 
